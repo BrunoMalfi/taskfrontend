@@ -1,6 +1,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+
 export default {
     methods: {
         ...mapActions(["fetchTasks","deleteTask"]),
@@ -31,6 +32,7 @@ export default {
         <div class="new-task-buttons">
             <button @click="()=> this.$router.push('/newtask')">New task</button>
         </div>
+        
         <div class="task-list">
             <div class="task-card" v-for="task of allTasks" :key="task._id">
                 <div class="task-header">
@@ -41,6 +43,7 @@ export default {
                             {{ task.completed ? 'Unmark' : 'Complete' }}
                         </button>
                         <h2>{{ task.title }}</h2>
+                        <p>{{task.description.length > 50 ? task.description.substring(0,47)+"...":task.description }}</p>
                     </div>
                 </div>
                 <div class="task-body">

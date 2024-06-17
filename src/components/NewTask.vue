@@ -32,6 +32,7 @@
   <template>
       <div class="new-task-form">
         <h2>Create a New Task</h2>
+        
         <form @submit.prevent="submitForm">
           <div class="form-group">
             <label for="title">Title:</label>
