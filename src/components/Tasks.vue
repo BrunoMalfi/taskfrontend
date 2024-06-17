@@ -5,9 +5,8 @@ export default {
     methods: {
         ...mapActions(["fetchTasks","deleteTask"]),
         handleDeleteTask(taskId) {
-            console.log(taskId)
-            this.deleteTask(taskId)
-            // return 0;
+            this.deleteTask(taskId).then(this.fetchTasks())
+            // TODO: messaje of the deleted tasks
         },
         editTask(task) {
             console.log(task)

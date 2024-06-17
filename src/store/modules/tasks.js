@@ -2,7 +2,8 @@
 import axios from "axios";
 const state = {
     tasks: [],
-    newTask:{ title:'',priority:'',description:''}
+    newTask:{ title:'',priority:'',description:''},
+    deletedTask:{},
 };
 const  API_URL = "http://localhost:8080/tasks/"
 const getters = {
@@ -27,7 +28,7 @@ const actions = {
         const response = await axios.delete(
             API_URL+"delete/"+taskId
         );
-        commit("deletedTask", response.data.task);
+        commit("setDeletedTask", response.data.task);
       },
 };
 const mutations = {
