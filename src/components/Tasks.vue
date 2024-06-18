@@ -11,12 +11,22 @@ export default {
         },
         editTask(task) {
             console.log(task)
-            // Logic to edit a task
+            this.$router.push('/edittask/'+task._id)
         },
         toggleComplete(task) {
             console.log(task)
             //task.completed = !task.completed;
-        }
+        },
+        getPriorityClass(priority) {
+            if (priority === 'High') {
+                return 'task-priority-high';
+            } else if (priority === 'Medium') {
+                return 'task-priority-medium';
+            } else if (priority === 'Low') {
+                return 'task-priority-low';
+            }
+            return 'task-priority-low';
+        },
     },
     computed: mapGetters(["allTasks"]),
 
@@ -34,7 +44,7 @@ export default {
         </div>
         
         <div class="task-list">
-            <div class="task-card" v-for="task of allTasks" :key="task._id">
+            <div class="task-card" v-for="task of allTasks" :key="task._id":class="getPriorityClass(task.priority)">
                 <div class="task-header">
                     <div class="task-buttons">
                         <button @click="editTask(task)">Edit</button>
@@ -43,7 +53,7 @@ export default {
                             {{ task.completed ? 'Unmark' : 'Complete' }}
                         </button>
                         <h2>{{ task.title }}</h2>
-                        <p>{{task.description.length > 50 ? task.description.substring(0,47)+"...":task.description }}</p>
+                        <p>{{task.description?.length > 50 ? task.description.substring(0,47)+"...":task.description }}</p>
                     </div>
                 </div>
                 <div class="task-body">
@@ -124,5 +134,16 @@ h1 {
 .task-body p {
     margin: 5px 0;
     color: #666;
+}
+.task-priority-high {
+    background-color: #ffcccc;
+}
+
+.task-priority-medium {
+    background-color: #ffffcc;
+}
+
+.task-priority-low {
+    background-color: #ccffcc;
 }
 </style>

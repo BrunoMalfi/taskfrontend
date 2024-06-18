@@ -4,12 +4,14 @@ const state = {
     tasks: [],
     newTask:{ title:'',priority:'',description:''},
     deletedTask:{},
+    task:{}
 };
 const  API_URL = "http://localhost:8080/tasks/"
 const getters = {
     allTasks: (state) => state.tasks,
     newTask: (state) => state.newTask,
     deletedTask: (state) => state.deletedTask,
+    task:(state)=>state.task
 };
 const actions = {
     async fetchTasks({ commit }) {
@@ -30,11 +32,25 @@ const actions = {
         );
         commit("setDeletedTask", response.data.task);
       },
+      async getTask({ commit },taskId) {
+        const response = await axios.get(
+            API_URL+"gettaskbyid/"+taskId
+        );
+        commit("setTask", response.data);
+      },
+
+      async updateTask({ commit },task) {
+        const response = await axios.put(
+            API_URL+"update/"+task._id,task
+        );
+        commit("setTask", response.data.task);
+      },
 };
 const mutations = {
     setTasks: (state, tasks) => (state.tasks = tasks),
     setNewTask: (state, newTask) => (state.newTask = newTask),
     setDeletedTask: (state, deletedTask) => (state.deletedTask = deletedTask),
+    setTask: (state, task) => (state.task = task),
 };
 export default {
     state,
