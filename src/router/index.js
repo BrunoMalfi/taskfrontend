@@ -4,6 +4,7 @@ import TasksView from '../views/TasksView.vue'
 import NewTaskView from '../views/NewTaskView.vue'
 import CounterView from '../views/CounterView.vue'
 import TodosView from '../views/TodosView.vue'
+import EditTaskView from '../views/EditTaskView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,12 @@ const router = createRouter({
       path: '/todos',
       name:'todos',
       component: TodosView
+
+    },
+    {
+      path: '/edittask/:id',
+      name:'edittask',
+      component: EditTaskView
 
     }
 
